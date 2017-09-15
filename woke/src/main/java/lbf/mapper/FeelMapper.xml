@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lbf.mapper.FeelMapper">
+  <resultMap type="lbf.bean.Feel" id="ResultMap">
+     <id column="fid" property="fid" jdbcType="INTEGER" />
+     <result column="userid" property="userid" jdbcType="INTEGER" />
+     <result column="feeltime" property="feeltime" jdbcType="TIMESTAMP" />
+     <result column="feelcontent" property="feelcontent" jdbcType="VARCHAR" />
+     <result column="pic" property="pic" jdbcType="VARCHAR" />   
+  </resultMap>
+	<insert id="insertFeel" parameterType="lbf.bean.Feel">
+		insert into Feel(userid,feeltime,feelcontent,pic)
+		values(#{userid},#{feeltime},#{feelcontent},#{pic})
+	</insert>
+	<select id="selectFeel" resultType="lbf.bean.Feel"
+		parameterType="lbf.bean.Feel">
+		SELECT feel.* ,user.username FROM feel INNER JOIN friendmap 
+		INNER JOIN user on feel.userid=friendmap.friendid and
+		 friendmap.friendid=user.userid where friendmap.userid=#{userid} 
+		 OR feel.userid=#{userid} order by feeltime desc LIMIT 0,2
+	</select>
+	<delete id="deleteFeel" parameterType="lbf.bean.Feel">
+		 delete from Feel where fid=#{fid} 
+	</delete>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lbf.mapper.MessageMapper">
+  <resultMap type="lbf.bean.Message" id="ResultMap">
+     <id column="messageid" property="messageid" jdbcType="INTEGER" />
+     <result column="receiveid" property="receiveid" jdbcType="INTEGER" />
+     <result column="senderid" property="senderid" jdbcType="INTEGER" />
+     <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
+     <result column="content" property="content" jdbcType="VARCHAR" />
+     <result column="parentmessageid" property="parentmessageid" jdbcType="INTEGER" />
+     <result column="pic" property="pic" jdbcType="VARCHAR" />   
+  </resultMap>
+     <insert id="insertMessage" parameterType="lbf.bean.Message">
+        insert into Message(receiveid,senderid,messagetime,content,parentmessageid,pic)
+		values(#{receiveid},#{senderid},#{messagetime},#{content},#{parentmessageid},#{pic})
+     </insert>
+     <select id="selectMessage" resultType="lbf.bean.Message" parameterType="lbf.bean.Message">
+           SELECT * from message order by messagetime desc
+     </select>
+     <delete id="deleteMessage" parameterType="lbf.bean.Message">
+          delete from Message where messageid=#{messageid}
+     </delete>
+</mapper>

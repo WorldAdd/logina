@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lbf.mapper.UserMapper">
+  <resultMap type="lbf.bean.User" id="ResultMap">
+     <id column="userid" property="userid" jdbcType="INTEGER" />
+     <result column="qq" property="qq" jdbcType="INTEGER" />
+     <result column="username" property="username" jdbcType="VARCHAR" />
+     <result column="password" property="password" jdbcType="VARCHAR" />
+     <result column="headpic" property="headpic" jdbcType="VARCHAR" />
+     <result column="sex" property="sex" jdbcType="INTEGER" />
+     <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+     <result column="state" property="state" jdbcType="INTEGER" />
+     <result column="nowaddress" property="nowaddress" jdbcType="VARCHAR" />
+     <result column="hometown" property="hometown" jdbcType="VARCHAR" />
+     <result column="ismarry" property="ismarry" jdbcType="INTEGER" />
+     <result column="lastvisit" property="lastvisit" jdbcType="TIMESTAMP" />
+  </resultMap>
+     
+  <sql id="Base_Column_List" >
+    userid, qq, username, password, headpic, sex, birthday, state, nowaddress, hometown, 
+    ismarry, lastvisit
+  </sql>
+  
+  <select id="selectall" resultMap="ResultMap" parameterType="Integer" >
+    select 
+    	*
+    from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <!-- 登录 -->
+    <select id="selectlogin" resultMap="ResultMap">
+    select 
+    	*
+    from user
+    where qq=#{qq,jdbcType=INTEGER}
+  </select>
+  <!-- //注册 -->
+  	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userid">
+	insert into User
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+    <if test="qq !=null">
+    qq
+    </if>
+    <if test="username !=null">
+    ,username
+    </if>
+     <if test="password !=null">
+    , password
+    </if>
+     <if test="headpic !=null">
+    , headpic
+    </if>
+     <if test="sex !=null">
+    , sex
+    </if>
+     <if test="birthday !=null">
+    , birthday
+    </if>
+     <if test="state !=null">
+    , state
+    </if>
+    <if test="nowaddress !=null">
+    , nowaddress
+    </if>
+    <if test="hometown !=null">
+    , hometown
+    </if>
+    <if test="ismarry !=null">
+    , ismarry
+    </if>
+    <if test="lastvisit !=null">
+    , lastvisit
+    </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    	<if test="qq !=null">
+			#{qq}
+		</if>
+		<if test="username !=null">
+			,#{username}
+		</if>
+		<if test="password !=null">
+			,#{password}
+		</if>
+		<if test="headpic !=null">
+			,#{headpic}
+		</if>
+		<if test="birthday !=null">
+			,#{birthday}
+		</if>
+		<if test="state !=null">
+			,#{state}
+		</if>
+		<if test="nowaddress !=null">
+			,#{nowaddress}
+		</if>
+		<if test="hometown !=null">
+			,#{hometown}
+		</if>
+		<if test="ismarry !=null">
+			,#{ismarry}
+		</if>
+		<if test="lastvisit !=null">
+			,#{lastvisit}
+		</if>
+    </trim>
+	</insert>
+	<!-- //登录时间的更新 -->
+	<update id="updateuser" parameterType="lbf.bean.User">
+	     update user set lastvisit=#{lastvisit},username=#{username} where userid = #{userid,jdbcType=INTEGER}
+	</update>
+	<!-- 修改头像 -->
+	<update id="updateheadpic" parameterType="lbf.bean.User">
+	      update user set headpic=#{headpic} where userid = #{userid,jdbcType=INTEGER}
+	</update>
+</mapper>

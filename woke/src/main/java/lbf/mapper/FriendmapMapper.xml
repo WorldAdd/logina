@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lbf.mapper.FriendmapMapper">
+  <resultMap type="lbf.bean.Friendmap" id="ResultMap">
+     <id column="friendmapid" property="friendmapid" jdbcType="INTEGER" />
+     <result column="userid" property="userid" jdbcType="INTEGER" />
+     <result column="friendid" property="friendid" jdbcType="INTEGER" />
+     <result column="state" property="state" jdbcType="INTEGER" />   
+     <result column="feeltime" property="feeltime" jdbcType="TIMESTAMP" />
+  </resultMap>
+	
+</mapper>

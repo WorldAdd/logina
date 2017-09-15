@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lbf.mapper.VisitoryMapper">
+  <resultMap type="lbf.bean.Visitory" id="ResultMap">
+     <id column="vid" property="vid" jdbcType="INTEGER" />
+     <result column="userid" property="userid" jdbcType="INTEGER" />
+     <result column="visid" property="visid" jdbcType="INTEGER" />
+     <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+     <result column="count" property="count" jdbcType="INTEGER" />   
+  </resultMap>
+	
+</mapper>
